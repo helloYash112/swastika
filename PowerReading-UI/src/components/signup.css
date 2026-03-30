@@ -1,0 +1,74 @@
+#signup {
+    width: 380px;
+    padding: 25px;
+
+    background-color: #9c5476;   /* soft & pleasant */
+    border: 2px solid burlywood;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    box-sizing: border-box;
+    margin: auto;
+}
+
+/* Label */
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+
+    display: block;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+/* Input */
+input {
+    width: 100%;
+    height: 42px;
+    padding: 8px 10px;
+
+    background-color: #fffaf3;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    font-size: 14px;
+    outline: none;
+    
+    color: black;
+     opacity: 1;
+     visibility: visible;
+     display: block;
+
+}
+
+/* Focus effect */
+input:focus {
+    border-color: orange;
+    box-shadow: 0 0 4px rgba(255, 165, 0, 0.4);
+}
+
+/* Button */
+#sign-sub {
+    width: 100%;
+    height: auto;
+
+    background-color: orange;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    align-self: center;
+}
+
+/* Hover */
+button:hover {
+    background-color: darkorange;
+}

@@ -1,0 +1,66 @@
+#input-form{
+  display: grid;
+  /* 4 Columns: Label (auto width), Input (takes remaining space), Label, Input */
+  grid-template-columns: auto 1fr auto 1fr; 
+  gap: 20px;          /* Vertical and horizontal spacing */
+  align-items: center; /* Keeps labels and inputs perfectly level */
+  width: 100%;
+  
+  
+ 
+}
+#btn{
+  grid-column: span 4; 
+  margin: 20px auto 0; 
+  width: 100%;          
+  padding: 12px;
+ background-color:maroon;
+  border-radius:10px ;
+}
+#reading{
+ width: 600px; /* Increased slightly for two columns */
+  margin: 0 auto;
+  background-color: rgb(221, 153, 17);
+  padding: 40px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+ font-weight:900;
+  text-align:right;
+  white-space:unset;
+  color: black;
+}
+
+input {
+ width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #555;
+  background-color: #2c2c2c;
+  color: white;
+}
+#meterId{
+ 
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+ 
+ background-color: rgb(221, 153, 17);
+ color:blue;
+  
+
+}
+#meterName{
+color:blue;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+ 
+  background-color: rgb(221, 153, 17);
+  
+}
+

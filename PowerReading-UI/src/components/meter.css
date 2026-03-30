@@ -1,0 +1,23 @@
+#meter{
+    width: 380px;
+    padding: 25px;
+
+    background-color: #9c5476;   
+    border: 2px solid rgba(223, 201, 6, 0.563);
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    box-sizing: border-box;
+    margin: auto;
+}
+
+#mbtn{
+    width:100%;
+    height: auto;
+    background-color: rgba(218, 165, 32, 0.745);
+    
+    
+}

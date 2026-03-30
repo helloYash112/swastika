@@ -1,0 +1,49 @@
+#app {
+  text-align: center;
+  background-color: #f5f5dc; /* soft mustard background */
+  min-height: 100vh;
+  padding: 40px;
+}
+
+#menus {
+  display: inline-block;
+  background: linear-gradient(135deg, rgb(113, 20, 96), rgb(180, 60, 150));
+  border-radius: 12px;
+  border: 2px solid goldenrod;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#menus:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+#menus #rbtn {
+  display: block;
+  width: 200px;
+  margin: 10px auto;
+  padding: 12px 20px;
+  background-color: goldenrod;
+  color: rgb(113, 20, 96);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#menus #rbtn:hover {
+  background-color: #ffd700;
+  transform: scale(1.05);
+}
+#menus {
+  animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

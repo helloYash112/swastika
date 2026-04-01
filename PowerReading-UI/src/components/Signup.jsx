@@ -1,13 +1,60 @@
 import './signup.css'
-import { useRef } from 'react';
+import { useRef,useState,useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {addUser} from '../api.js'
 
+function reducer(state, action) {
+    switch (action.type) {
+      case 'add-meter': {
+        return {
+          ...state,
+          meter: action.value
+        };
+      }
+      case 'add-user': {
+        return { 
+          ...state,
+          user: action.value
+        };
+      }
+      case 'reset': {
+        return {}; 
+      }
+      default: { 
+        return state;
+      }
+    }
+  }
 export default function Signup() {
     const userRef=useRef(null);
     const pswRef=useRef(null);
+    const [status,setStatus]=useState(null);
     const navigate=useNavigate();
-    function onSubmit(e){
+    const[state,dispatcher]=useReducer(reducer,{});
+    
+    async function  onSubmit(e){
         e.preventDefault(); 
+        //sending data to api
+        try {
+            setStatus('loading....');
+            
+           
+            const response = await addUser({
+              name: userRef.current.value,
+              password: pswRef.current.value
+            });
+          
+            if (response) {
+              setStatus('signup successfull....'); // Fixed spelling
+            
+              console.log("Success:", response); 
+            }
+          
+          } catch (error) {
+            
+            setStatus('Error occurred');
+            console.log(error.message);
+          }
         
         if(userRef.current.value !='' && pswRef.current.value != '' ){
             alert(`userName :${userRef.current.value}  password :${pswRef.current.value}`)
@@ -33,7 +80,7 @@ export default function Signup() {
         <input type="password" id="password" ref={pswRef} placeholder="Enter your password" />
     </div>
 
-    <button id='sign-sub' type="submit">Signup/Login</button>
+    <button id='sign-sub' type="submit">Signup</button>
 </form>
     );
 }

@@ -13,5 +13,12 @@ export const READINGS = () => API.get("/api/reading");
 export const USER = (id) => API.get(`/api/users/${id}`);
 export const METER = (id) => API.get(`/api/meters/${id}`);
 export const READING = (id) => API.get(`/api/reading/${id}`);
-
+//creating a user
+export const addUser = ({ user, password }) => {
+  
+  return API.post('/api/users', {
+    userName: user,
+    password: password
+  });
+};
 

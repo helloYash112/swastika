@@ -18,7 +18,7 @@ export const addUser = ({ user, password }) => {
   
   return API.post('/api/users', {
     userName: user,
-    password: password
+    userPassword: password
   });
 };
 

@@ -40,7 +40,7 @@ export default function Signup() {
             
            
             const response = await addUser({
-              name: userRef.current.value,
+              user: userRef.current.value,
               password: pswRef.current.value
             });
           

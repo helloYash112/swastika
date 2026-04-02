@@ -37,17 +37,16 @@ export default function Signup() {
         //sending data to api
         try {
             setStatus('loading....');
-            console.log(`user name : ${userRef.current.value}`)
            
             const response = await addUser({
               user: userRef.current.value,
               password: pswRef.current.value
             });
           
-            if (response) {
-              setStatus('signup successfull....'); // Fixed spelling
+            if (response.status ==201) {
+              setStatus('signup successfull....'); 
             
-              console.log("Success:", response); 
+              console.log("Success:", response.data); 
             }
           
           } catch (error) {

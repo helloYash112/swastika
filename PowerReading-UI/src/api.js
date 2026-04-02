@@ -15,10 +15,9 @@ export const METER = (id) => API.get(`/api/meters/${id}`);
 export const READING = (id) => API.get(`/api/reading/${id}`);
 //creating a user
 export const addUser = ({ user, password }) => {
-  
   return API.post('/api/users', {
     userName: user,
-    userPassword: password
+    userPassword: password,
+    meter: []
   });
-};
-
+}; 

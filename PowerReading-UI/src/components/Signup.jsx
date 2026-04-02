@@ -37,7 +37,7 @@ export default function Signup() {
         //sending data to api
         try {
             setStatus('loading....');
-            
+            console.log(`user name : ${userRef.current.value}`)
            
             const response = await addUser({
               user: userRef.current.value,

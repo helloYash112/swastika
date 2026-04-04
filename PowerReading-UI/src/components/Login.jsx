@@ -17,11 +17,13 @@ const Login= () => {
   
     try {
       
-       const response=await getUser(formData.username,formData.password);
-      const data = await response.json();
-      console.log(data);
+        const response = await getUser(formData.username, formData.password);
+    
+        console.log(response)
+        const data = response.data;
+       console.log(data);
   
-      if (response.ok) {
+      if (response.status==200) {
         setMessage('Login Successful!');
         console.log('User Data:', data);
       } else {

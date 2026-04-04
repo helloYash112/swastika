@@ -2,6 +2,7 @@ import './signup.css'
 import { useRef,useState,useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {addUser} from '../api.js'
+import {Link} from 'react-router-dom';
 
 function reducer(state, action) {
     switch (action.type) {
@@ -66,7 +67,7 @@ export default function Signup() {
 
 
     }
-    return (
+    return (<>
        <form id='signup' onSubmit={onSubmit}>
         <h2>Login/Signup</h2>
     <div>
@@ -80,7 +81,11 @@ export default function Signup() {
     </div>
 
     <button id='sign-sub' type="submit">Signup</button>
+    <h6>have an account ? click below link...</h6>
+    <Link to='/login'> login </Link>
 </form>
+
+</>
     );
 }
 

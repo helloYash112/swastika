@@ -21,3 +21,7 @@ export const addUser = ({ user, password }) => {
     meter: []
   });
 }; 
+//checking user credentials
+export const getUser=(userName,userPassword)=>{
+  return API.get(`/api/users/login?userName=${userName}&userPassword=${userPassword}`);
+}

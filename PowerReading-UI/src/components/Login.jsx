@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import {getUser} from '../api.js'
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 const Login= () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const navigate=useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,12 +27,21 @@ const Login= () => {
   
       if (response.status==200) {
         setMessage('Login Successful!');
-        console.log('User Data:', data);
+        setTimeout(()=>{
+          navigate('/home');
+  
+        },2000);
       } else {
         setMessage('Invalid username or password.');
+        navigate('/');
       }
     } catch (error) {
       setMessage('Connection failed.');
+      setTimeout(()=>{
+        navigate('/');
+
+      },2000);
+     
     } finally {
       setIsLoading(false);
     }

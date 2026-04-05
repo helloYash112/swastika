@@ -79,10 +79,13 @@ export default function Signup() {
         <label for="password">Password</label>
         <input type="password" id="password" ref={pswRef} placeholder="Enter your password" />
     </div>
-
-    <button id='sign-sub' type="submit">Signup</button>
-    <h6>have an account ? click below link...</h6>
+     <div>
+     <button id='sign-sub' type="submit">Signup</button>
+     <h6>have an account ? click below link...</h6>
     <Link to='/login'> login </Link>
+     </div>
+   
+   
 </form>
 
 </>

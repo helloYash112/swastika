@@ -10,15 +10,24 @@
   
   /* The white card */
   .login-card {
-    display: inline-block;
-  background: linear-gradient(135deg, rgb(113, 20, 96), rgb(180, 60, 150));
-  border-radius: 12px;
-  border: 2px solid goldenrod;
-  padding: 30px;
+  /* Change to flex to control internal alignment easily */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers inputs and buttons horizontally */
+  
+  /* Keep your styling */
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent */
+  backdrop-filter: blur(10px); /* The frosted effect */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);border-radius: 12px;
+  
+  padding: 30px; /* This will now apply equally to all sides */
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  width: 575px;
-  }
+  color: #f8fafc;
+  /* Optional: Set a specific width so it doesn't look too skinny */
+  min-width: 300px; 
+}
   
   .login-title {
     font-size: 1.5rem;
@@ -50,12 +59,9 @@
   
   /* Inputs */
   .form-input {
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.375rem;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+     width: 100%;
+  margin-bottom: 15px;
+  box-sizing: border-box;
   }
   
   .form-input:focus {

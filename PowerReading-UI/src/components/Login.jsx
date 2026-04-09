@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {getUser} from '../api.js'
+import {userApi} from '../api.js'
 import { useNavigate } from 'react-router-dom';
 import './login.css';
 const Login= () => {
@@ -19,7 +19,7 @@ const Login= () => {
   
     try {
       
-        const response = await getUser(formData.username, formData.password);
+        const response = await userApi.auth.getUser(formData.username, formData.password);
     
         console.log(response)
         const data = response.data;

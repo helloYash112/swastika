@@ -1,7 +1,7 @@
 import './signup.css'
 import { useRef,useState,useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {addUser} from '../api.js'
+import {userApi} from '../api.js'
 import {Link} from 'react-router-dom';
 
 function reducer(state, action) {
@@ -39,7 +39,7 @@ export default function Signup() {
         try {
             setStatus('loading....');
            
-            const response = await addUser({
+            const response = await userApi.create.addUser({
               user: userRef.current.value,
               password: pswRef.current.value
             });
@@ -69,7 +69,7 @@ export default function Signup() {
     }
     return (<>
        <form id='signup' onSubmit={onSubmit}>
-        <h2>Login/Signup</h2>
+        <h2>Signup</h2>
     <div>
         <label for="username">Username</label>
         <input type="text" id="username"  ref={userRef} placeholder="Enter your username" />

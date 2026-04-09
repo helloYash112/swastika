@@ -5,20 +5,21 @@ const API = axios.create({
 });
 
 // Endpoints for all entities
-export const USERS = () => API.get("/api/users");
-export const METERS = () => API.get("/api/meters");
-export const READINGS = () => API.get("/api/reading");
+ const USERS = () => API.get("/api/users");
+ const METERS = () => API.get("/api/meters");
+ const READINGS = () => API.get("/api/reading");
 
 // Filtering by ID
-export const USER = (id) => API.get(`/api/users/${id}`);
-export const METER = (id) => API.get(`/api/meters/${id}`);
-export const READING = (id) => API.get(`/api/reading/${id}`);
+ const USER = (id) => API.get(`/api/users/${id}`);
+ const METER = (id) => API.get(`/api/meters/${id}`);
+ const READING = (id) => API.get(`/api/reading/${id}`);
+ const userMeter=(id) =>API.get(`/api/meters/user${id}`);
 //creating a user
-export const addUser = ({ user, password }) => {
+ const addUser = ({ user, password,meters=[] }) => {
   return API.post('/api/users', {
     userName: user,
     userPassword: password,
-    meter: []
+    meter: meters
   });
 }; 
 //checking user credentials
@@ -26,3 +27,40 @@ export const addUser = ({ user, password }) => {
 export const getUser = (userName, userPassword) => {
   return API.get(`/api/users/login?userName=${userName}&userPassword=${userPassword}`);
 };
+
+//save reading to meter by mid
+/**
+ * Java DTO:
+ * public record ReadingDTO(LocalDate date, LocalTime time, double kwh, float pf) {}
+ *
+ * JS client function:
+ */
+const addReading = ({ id, date, time, kwh, pf }) => {
+  return API.post(`api/meters/reading/${id}`, {
+    date,
+    time,
+    kwh,
+    pf,
+  });
+};
+
+export const userApi={
+  listOfAll :{
+    USERS,
+    METERS,
+    READINGS
+  },
+  getById:{
+    USER,
+    METER,
+    READING,
+    userMeter
+  },
+  create :{
+    addUser,
+    addReading
+  },
+  auth :{
+    getUser
+  }
+}

@@ -43,6 +43,14 @@ const addReading = ({ id, date, time, kwh, pf }) => {
     pf,
   });
 };
+//add meter to user 
+//MeterDTO(String meterName,String meterNumber,String meterMacAddress) 
+const addMeter = (userId, meter) => {
+  return API.post(`api/meters/meter`, { 
+    userId, 
+    meter  
+  });
+};
 
 export const userApi={
   listOfAll :{
@@ -58,7 +66,8 @@ export const userApi={
   },
   create :{
     addUser,
-    addReading
+    addReading,
+    addMeter
   },
   auth :{
     getUser

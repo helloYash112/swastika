@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import {userApi} from '../api.js'
 import { useNavigate } from 'react-router-dom';
+import {fetchByNameAndPassword} from '../userSlice.js';
 import './login.css';
+import {useDispatch,useSelector} from 'react-redux';
 const Login= () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
   const navigate=useNavigate();
+  const dispatch=useDispatch();
+  const { loading, error, user } = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,23 +22,23 @@ const Login= () => {
     setMessage('');
   
     try {
-      
-        const response = await userApi.auth.getUser(formData.username, formData.password);
+        
+      const response = await dispatch(
+        fetchByNameAndPassword({ 
+          userName: formData.username, 
+          userPassword: formData.password 
+        })
+      ).unwrap();
+        //const response = await userApi.auth.getUser(formData.username, formData.password);
     
-        console.log(response)
-        const data = response.data;
-       console.log(data);
-  
-      if (response.status==200) {
-        setMessage('Login Successful!');
-        setTimeout(()=>{
-          navigate('/home');
-  
-        },1000);
-      } else {
-        setMessage('Invalid username or password.');
-        navigate('/');
-      }
+        
+       console.log(response);
+       setMessage('Login Successful!');
+       setTimeout(()=>{
+         navigate('/home');
+ 
+       },1000);
+    
     } catch (error) {
       setMessage('Connection failed.');
       setTimeout(()=>{

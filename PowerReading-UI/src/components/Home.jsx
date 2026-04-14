@@ -3,6 +3,7 @@ import './home.css'
 
 import { useNavigate } from "react-router-dom"
 
+
 export function Home(){
     const navigater=useNavigate();
     return<div id="app"

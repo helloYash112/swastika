@@ -23,7 +23,7 @@ import { userApi } from './api.js';
  */
 
 // getting user by sinup ,required username and password
-const fetchByNameAndPassword = createAsyncThunk(
+export const fetchByNameAndPassword = createAsyncThunk(
   'user/fetchByNameAndPassword',
   async ({ userName, userPassword }, thunkAPI) => {
     try {
@@ -198,3 +198,4 @@ const userSlice = createSlice({
 
   },
 });
+export default  userSlice.reducer;

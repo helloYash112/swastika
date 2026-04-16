@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL: "https://swastika-9mp3.onrender.com/",
+ //baseURL: "http://localhost:8080/",
 });
 
 // Endpoints for all entities
@@ -15,11 +16,12 @@ const API = axios.create({
  const READING = (id) => API.get(`/api/reading/${id}`);
  const userMeter=(id) =>API.get(`/api/meters/user${id}`);
 //creating a user
- const addUser = ({ user, password,meters=[] }) => {
+ const addUser = ({ userName, userPassword }) => {
+  
   return API.post('/api/users', {
-    userName: user,
-    userPassword: password,
-    meter: meters
+    userName,
+    userPassword,
+    
   });
 }; 
 //checking user credentials
@@ -35,8 +37,8 @@ export const getUser = (userName, userPassword) => {
  *
  * JS client function:
  */
-const addReading = ({ id, date, time, kwh, pf }) => {
-  return API.post(`api/meters/reading/${id}`, {
+const addReading = ({ mid, date, time, kwh, pf }) => {
+  return API.post(`api/meters/reading/${mid}`, {
     date,
     time,
     kwh,

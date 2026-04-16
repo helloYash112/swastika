@@ -1,0 +1,35 @@
+.lottie-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* smoother feel */
+  animation: fadeIn 0.25s ease;
+}
+
+/* animation size control fallback */
+.lottie-container svg {
+  width: 180px;
+  height: 180px;
+}
+
+/* text styling */
+.lottie-text {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* smooth entry */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

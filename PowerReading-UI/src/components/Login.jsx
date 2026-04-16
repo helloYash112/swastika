@@ -1,101 +1,59 @@
-import React, { useState } from 'react';
-import {userApi} from '../api.js'
+import React, { useState ,useEffect,useRef} from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import {fetchByNameAndPassword} from '../userSlice.js';
-import './login.css';
+import './signup1.css'
 import {useDispatch,useSelector} from 'react-redux';
+import StatusAnimation from './StatusAnimation.jsx';
+import UserInput from './UserInput.jsx';
+
 const Login= () => {
-  const [formData, setFormData] = useState({ username: '', password: '' });
-  const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  
   const navigate=useNavigate();
   const dispatch=useDispatch();
-  const { loading, error, user } = useSelector((state) => state.user);
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setMessage('');
-  
-    try {
-        
-      const response = await dispatch(
-        fetchByNameAndPassword({ 
-          userName: formData.username, 
-          userPassword: formData.password 
-        })
-      ).unwrap();
-        //const response = await userApi.auth.getUser(formData.username, formData.password);
-    
-        
-       console.log(response);
-       setMessage('Login Successful!');
-       setTimeout(()=>{
-         navigate('/home');
+  const { status} = useSelector((state) => state.user);
+  const emailRef=useRef(null);
+  const pswRef=useRef(null);
  
-       },1000);
-    
-    } catch (error) {
-      setMessage('Connection failed.');
-      setTimeout(()=>{
-        navigate('/');
+ const handleLogin = (e) => {
+  e.preventDefault();
 
-      },1000);
-     
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  dispatch(
+    fetchByNameAndPassword({
+      userName: emailRef.current.value,
+      userPassword: pswRef.current.value,
+    })
+  );
+};
+console.log(status);
+useEffect(() => {
+  if (status === "success") {
+    const timer = setTimeout(() => {
+      navigate("/home");
+    }, 1500); 
+
+    return () => clearTimeout(timer);
+  }
+}, [status, navigate]);
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <h2 className="login-title">Login</h2>
+    <div className="container">
+      
+         <StatusAnimation ></StatusAnimation>
         
         <form onSubmit={handleLogin} className="login-form">
-          <div className="form-group">
-            <label className="form-label">Username</label>
-            <input
-              type="text"
-              name="username"
-              required
-              className="form-input"
-              placeholder="Enter your username"
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              name="password"
-              required
-              className="form-input"
-              placeholder="••••••••"
-              onChange={handleChange}
-            />
-          </div>
+          <UserInput type="email" placeholder="Enter Email" ref={emailRef} icon="📧"></UserInput>
+          <UserInput type="password" placeholder="Enter Password" ref={pswRef} icon="🔒"></UserInput>
+         
 
           <button
             type="submit"
-            disabled={isLoading}
             className="login-button"
           >
-            {isLoading ? 'Checking...' : 'Sign In'}
+            Login
           </button>
         </form>
-
-        {message && (
-          <p className={`status-message ${message.includes('Successful') ? 'success' : 'error'}`}>
-            {message}
-          </p>
-        )}
-      </div>
+ 
     </div>
   );
 };

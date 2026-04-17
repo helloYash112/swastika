@@ -30,6 +30,11 @@ export default function MeterForm() {
     let mn = mname.current.value;
     let mnu = mnum.current.value;
     let mm = mmac.current.value;
+    if(mn.trim() ==="" || mnu.trim()===""|| mm.trim() ==="" ){
+      alert("input feilds should not be empty !");
+      return;
+
+    }
     const meter = {
       meterName: mn,
       meterNumber: mnu,

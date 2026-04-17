@@ -21,6 +21,15 @@ function ReadingForm() {
   const navigater=useNavigate();
   function submitReading(e) {
     e.preventDefault();
+    if (
+      kwhRef.current.value.trim() === "" ||
+      pfRef.current.value.trim() === "" ||
+      selectedMeter === null
+    ) {
+      alert("Input fields should not be empty!");
+      return;
+    }
+    
     const readings = {
       mid: selectedMeter.value,
       date: new Date().toISOString().split("T")[0], // "YYYY-MM-DD"

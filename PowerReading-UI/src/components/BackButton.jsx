@@ -7,7 +7,7 @@ function BackButton({ to = "/home", label = "Back to Home" }) {
 
   return (
     <button 
-    type="btn"
+    type="button"
       className="back-button"
       onClick={() => navigate(to)}
     >

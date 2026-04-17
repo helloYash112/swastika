@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
-  background: #ffffff;
+ background: linear-gradient(135deg,rgb(196, 132, 15), #d31664);
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -44,4 +44,31 @@
 
 .readings-table td {
   transition: background-color 0.2s ease;
+}
+.meter{
+  color:black;
+ 
+  
+}
+.meter :hover{
+  color: black;
+   background: linear-gradient(135deg,rgb(196, 132, 15), #d31664);
+  
+}
+.back-button {
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #007bff, #0056b3); /* blue gradient */
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+  background: linear-gradient(135deg,rgb(196, 132, 15), #d31664);
 }

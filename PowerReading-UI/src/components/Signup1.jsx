@@ -47,7 +47,7 @@ const Signup1 = () => {
                 <UserInput type="password" placeholder="Enter Password" ref={passwordRef} icon="🔒"></UserInput>
                 <button type="submit">Sign Up </button>
                  <p>have an account ? login here...</p>
-                <Link to='/login'> login </Link>
+                <Link className="link" to='/login'> login </Link>
             </form>
            
         </div>

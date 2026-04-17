@@ -1,10 +1,11 @@
-import { useRef } from "react";
+import { useRef ,useEffect} from "react";
 import UserInput from "./UserInput";
 import { useDispatch, useSelector } from "react-redux";
 import "./signup1.css";
 import StatusAnimation from "./StatusAnimation";
 import { createMeter } from "../userSlice";
-
+import { useNavigate } from "react-router-dom";
+import BackButton from "./BackButton";
 /**
  * 
 meters
@@ -23,7 +24,7 @@ export default function MeterForm() {
   const mmac = useRef("");
   const { status, error, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+   const navigater=useNavigate();
   function display(e) {
     e.preventDefault();
     let mn = mname.current.value;
@@ -36,8 +37,15 @@ export default function MeterForm() {
     };
     const response = dispatch(createMeter({userId:user.userId,meter}));
     //console.log(response);
-    console.log(user);
+    //console.log(user);
   }
+useEffect(() => {
+  if (user === null) {
+    navigate("/login");
+  }
+}, [user]);
+
+  
 
 
   return (
@@ -60,7 +68,9 @@ export default function MeterForm() {
           ref={mmac}
         ></UserInput>
         <button type="submit">Submit</button>
+        <BackButton></BackButton>
       </form>
+      
     </div>
   );
 }

@@ -1,12 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
-import { useRef, useState } from "react";
+import { useRef, useState ,useEffect} from "react";
 import StatusAnimation from "./StatusAnimation";
 import UserInput from "./UserInput";
 //import './reading-form.css';
 import "./signup1.css";
 import power from "../assets/logo/power.png";
 import { addReading } from "../userSlice";
+import { useNavigate } from "react-router-dom"
+import BackButton from "./BackButton";
 
 function ReadingForm() {
   const kwhRef = useRef(null);
@@ -14,8 +16,9 @@ function ReadingForm() {
   const dispatch = useDispatch();
   const icon = <img src={power} alt="Power Icon" width={20} height={20} />;
   const meters = useSelector((state) => state.user.user?.meters);
-
+  const user=useSelector((state)=>state.user.user);
   const [selectedMeter, setSelectedMeter] = useState(null);
+  const navigater=useNavigate();
   function submitReading(e) {
     e.preventDefault();
     const readings = {
@@ -27,10 +30,17 @@ function ReadingForm() {
     };
     dispatch(addReading(readings));
   }
+ useEffect(() => {
+  if (user === null) {
+    navigate("/login");
+  }
+}, [user]);
+
   return (
     <div className="container">
       <StatusAnimation></StatusAnimation>
       <form onSubmit={submitReading}>
+
         <UserInput
           type="number"
           ref={kwhRef}
@@ -55,7 +65,9 @@ function ReadingForm() {
         />
 
         <button> Save data...</button>
+         <BackButton></BackButton>
       </form>
+     
     </div>
   );
 }

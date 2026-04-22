@@ -1,64 +1,101 @@
+/* CONTAINER */
 .meter-readings {
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
- background: linear-gradient(135deg,rgb(196, 132, 15), #d31664);
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  background: linear-gradient(135deg, rgb(196, 132, 15), #d31664);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* TABLE */
 .readings-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1.5rem;
   background: #fff;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
-.readings-table th,
-.readings-table td {
-  padding: 1rem;
-  text-align: center;
-  border-bottom: 1px solid #e0e0e0;
-  font-size: 0.95rem;
-  color: #333;
-}
-
+/* HEADER */
 .readings-table th {
-  background-color: #0078d4; /* Microsoft blue */
+  background-color: #0078d4;
   color: #fff;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  padding: 1rem;
+  text-align: center;
 }
 
-.readings-table tr:nth-child(even) td {
-  background-color: #f9fbfc; /* subtle striping */
-}
-
-.readings-table tr:hover td {
-  background-color: #eef6fb; /* highlight on hover */
-}
-
+/* BODY */
 .readings-table td {
+  padding: 0.9rem;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+  color: #333;
+  text-align: center;
   transition: background-color 0.2s ease;
 }
-.meter{
-  color:black;
- 
-  
+
+/* STRIPES (exclude summary row) */
+.readings-table tr:not(.summary-row):nth-child(even) td {
+  background-color: #f9fbfc;
 }
-.meter :hover{
+
+/* HOVER (exclude summary row) */
+.readings-table tr:not(.summary-row):hover td {
+  background-color: #eef6fb;
+}
+
+/* ALIGN NUMBERS */
+.readings-table th:nth-child(4),
+.readings-table th:nth-child(5),
+.readings-table th:nth-child(6),
+.readings-table tbody td:nth-child(4),
+.readings-table tbody td:nth-child(5),
+.readings-table tbody td:nth-child(6) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* SUMMARY ROW */
+.readings-table .summary-row td {
+  background-color: #fff3cd;
+  font-weight: 700;
+  border-top: 3px solid #000;
+  color: #000;
+}
+
+/* keep number alignment in summary */
+.readings-table .summary-row td:nth-child(4),
+.readings-table .summary-row td:nth-child(5),
+.readings-table .summary-row td:nth-child(6) {
+  text-align: right;
+}
+
+/* highlight total amount */
+.readings-table .summary-row td:nth-child(6) {
+  color: #d32f2f;
+}
+
+/* FIXED: meter hover (no space!) */
+.meter {
   color: black;
-   background: linear-gradient(135deg,rgb(196, 132, 15), #d31664);
-  
 }
+
+.meter:hover {
+  color: black;
+  background: linear-gradient(135deg, rgb(196, 132, 15), #d31664);
+}
+
+/* BUTTON */
 .back-button {
   height: 48px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #007bff, #0056b3); /* blue gradient */
+  background: linear-gradient(135deg, #007bff, #0056b3);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 15px;
@@ -70,5 +107,5 @@
 .back-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
-  background: linear-gradient(135deg,rgb(196, 132, 15), #d31664);
+  background: linear-gradient(135deg, rgb(196, 132, 15), #d31664);
 }

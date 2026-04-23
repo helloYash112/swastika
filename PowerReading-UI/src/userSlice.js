@@ -160,10 +160,12 @@ const userSlice = createSlice({
       })
       .addCase(addReading.fulfilled, (state, action) => {
         state.status = "success";
-        const { mid, readings } = action.payload; // ReadingByIdDTO
+
+        const { mid, readings } = action.payload;
         const meter = state.user?.meters.find((m) => m.id === mid);
+
         if (meter) {
-          meter.readings = readings;
+          meter.readings.push(...readings);
         }
       })
 
@@ -172,27 +174,27 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
 
-      .addCase(createMeter.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
-      })
-      .addCase(createMeter.fulfilled, (state, action) => {
-        state.status = "success";
+    .addCase(createMeter.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    })
+    .addCase(createMeter.fulfilled, (state, action) => {
+      state.status = "success";
 
-        if (state.user) {
-          // ensure meters array exists
-          if (!state.user.meters) {
-            state.user.meters = [];
-          }
-
-          state.user.meters.push(action.payload);
+      if (state.user) {
+        // ensure meters array exists
+        if (!state.user.meters) {
+          state.user.meters = [];
         }
-      })
 
-      .addCase(createMeter.rejected, (state, action) => {
-        state.status = "error";
-        state.error = action.payload;
-      });
-  },
+        state.user.meters.push(action.payload);
+      }
+    })
+
+    .addCase(createMeter.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.payload;
+    });
+},
 });
 export default userSlice.reducer;

@@ -18,7 +18,7 @@ function ReadingForm() {
   const meters = useSelector((state) => state.user.user?.meters);
   const user=useSelector((state)=>state.user.user);
   const [selectedMeter, setSelectedMeter] = useState(null);
-  const navigater=useNavigate();
+  const navigate=useNavigate();
   function submitReading(e) {
     e.preventDefault();
     if (

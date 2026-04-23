@@ -24,7 +24,7 @@ export default function MeterForm() {
   const mmac = useRef("");
   const { status, error, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-   const navigater=useNavigate();
+   const navigate=useNavigate();
   function display(e) {
     e.preventDefault();
     let mn = mname.current.value;

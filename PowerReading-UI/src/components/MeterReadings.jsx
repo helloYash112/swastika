@@ -9,10 +9,10 @@ import formatINR from "../assets/currency-formater";
 
 export default function MeterReadings() {
   const charge = 5.82;
-  const meters = useSelector((state) => state.user.user?.meters || []);
   const user = useSelector((state) => state.user.user);
+  const meters = user?.meters ?? [];
   const [selectedMeter, setSelectedMeter] = useState(null);
-  const navigater = useNavigate();
+  const navigate = useNavigate();
   const [readings, setReadings] = useState([]);
   const options = meters.map((meter) => ({
     value: meter.id,
@@ -29,10 +29,11 @@ export default function MeterReadings() {
     }
   }, [selectedMeter, meters]);
   useEffect(() => {
-    if (user === null) {
+    if (user === null ) {
       navigate("/login");
     }
   }, [user]);
+ 
 
   const totalUnits = readings.reduce((sum, r, idx) => {
     if (idx === 0) return sum;

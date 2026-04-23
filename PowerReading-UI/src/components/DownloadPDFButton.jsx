@@ -6,7 +6,8 @@ import formatINR from "../assets/currency-formater";
 
 
 export default function DownloadPDFButton({ selectedMeter }) {
-  const meters = useSelector((state) => state.user.user.meters);
+   const user = useSelector((state) => state.user.user);
+   const meters = user?.meters ?? [];
   const charge =5.82;
 
   const handleDownload = () => {

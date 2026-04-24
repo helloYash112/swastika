@@ -15,6 +15,16 @@ const API = axios.create({
  const METER = (id) => API.get(`/api/meters/${id}`);
  const READING = (id) => API.get(`/api/reading/${id}`);
  const userMeter=(id) =>API.get(`/api/meters/user${id}`);
+const fetchMeterData=(meterId,startDate,endDate) =>{
+  return API.get(`/api/reading/meter/${meterId}/data`,
+    {
+        params: {
+          startDate,
+          endDate,
+        },
+      }
+  )
+}
 //creating a user
  const addUser = ({ userName, userPassword }) => {
   
@@ -64,7 +74,8 @@ export const userApi={
     USER,
     METER,
     READING,
-    userMeter
+    userMeter,
+    fetchMeterData
   },
   create :{
     addUser,

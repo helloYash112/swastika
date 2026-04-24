@@ -91,6 +91,24 @@ export const createMeter = createAsyncThunk(
   },
 );
 
+//getting reading by selecting moth 
+export const fetchMeterData = createAsyncThunk(
+  "meter/fetchMeterData",
+  async ({ meterId, startDate, endDate }, { rejectWithValue }) => {
+    try {
+      const response = await userApi.getById.fetchMeterData(meterId, startDate, endDate);
+
+      return {
+        meterId,
+        readings: response.data,
+      };
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || "Something went wrong"
+      );
+    }
+  }
+);
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -174,27 +192,48 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
 
-    .addCase(createMeter.pending, (state) => {
-      state.status = "loading";
-      state.error = null;
-    })
-    .addCase(createMeter.fulfilled, (state, action) => {
-      state.status = "success";
+      .addCase(createMeter.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(createMeter.fulfilled, (state, action) => {
+        state.status = "success";
 
-      if (state.user) {
-        // ensure meters array exists
-        if (!state.user.meters) {
-          state.user.meters = [];
+        if (state.user) {
+          // ensure meters array exists
+          if (!state.user.meters) {
+            state.user.meters = [];
+          }
+
+          state.user.meters.push(action.payload);
         }
+      })
 
-        state.user.meters.push(action.payload);
-      }
-    })
+      .addCase(createMeter.rejected, (state, action) => {
+        state.status = "error";
+        state.error = action.payload;
+      })
+      .addCase(fetchMeterData.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(fetchMeterData.fulfilled, (state, action) => {
+        state.status = "success";
 
-    .addCase(createMeter.rejected, (state, action) => {
-      state.status = "error";
-      state.error = action.payload;
-    });
+        const { meterId, readings } = action.payload;
+
+        const meter = state.user?.user?.meters?.find(
+          (m) => m.id === meterId
+        );
+
+        if (meter) {
+          meter.readings = readings; 
+        }
+      })
+      .addCase(fetchMeterData.rejected, (state, action) => {
+        state.status = "error";
+        state.error = action.payload;
+      });
 },
 });
 export default userSlice.reducer;

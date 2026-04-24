@@ -47,6 +47,7 @@ export default function MeterReadings() {
     <div className="meter-readings">
       <BackButton></BackButton>
       <DownloadPDFButton selectedMeter={selectedMeter}></DownloadPDFButton>
+      <button onClick={()=>navigate('/date-picker')}>Get Reading By Month...</button>
       <Select
         options={options}
         value={selectedMeter}

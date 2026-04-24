@@ -6,10 +6,12 @@ import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom"
 
 
+
 export function Home(){
     const navigater=useNavigate();
     const {user}=useSelector(state=>state.user);
     const dispatch=useDispatch();
+    
     //console.log("user",user);
     useEffect(()=>{
         let timer;

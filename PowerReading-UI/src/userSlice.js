@@ -91,23 +91,25 @@ export const createMeter = createAsyncThunk(
   },
 );
 
-//getting reading by selecting moth 
+//getting reading by selecting moth
 export const fetchMeterData = createAsyncThunk(
   "meter/fetchMeterData",
   async ({ meterId, startDate, endDate }, { rejectWithValue }) => {
     try {
-      const response = await userApi.getById.fetchMeterData(meterId, startDate, endDate);
+      const response = await userApi.getById.fetchMeterData(
+        meterId,
+        startDate,
+        endDate,
+      );
 
       return {
         meterId,
         readings: response.data,
       };
     } catch (error) {
-      return rejectWithValue(
-        error.response?.data || "Something went wrong"
-      );
+      return rejectWithValue(error.response?.data || "Something went wrong");
     }
-  }
+  },
 );
 const userSlice = createSlice({
   name: "user",
@@ -217,23 +219,20 @@ const userSlice = createSlice({
         state.status = "loading";
         state.error = null;
       })
-      .addCase(fetchMeterData.fulfilled, (state, action) => {
-        state.status = "success";
-
-        const { meterId, readings } = action.payload;
-
-        const meter = state.user?.user?.meters?.find(
-          (m) => m.id === meterId
-        );
-
-        if (meter) {
-          meter.readings = readings; 
+    .addCase(fetchMeterData.fulfilled, (state, action) => {
+      state.status="success";
+      const { meterId, readings } = action.payload;
+      state.user.meters = state.user.meters.map((m) => {
+        if (Number(m.id) === Number(meterId)) {
+          return { ...m, readings };
         }
-      })
-      .addCase(fetchMeterData.rejected, (state, action) => {
-        state.status = "error";
-        state.error = action.payload;
+        return m;
+        
       });
-},
+    }).addCase(fetchMeterData.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.payload;
+    });
+  },
 });
 export default userSlice.reducer;

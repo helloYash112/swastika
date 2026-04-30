@@ -39,7 +39,6 @@ export default function MeterReadings() {
       {!isSubmitted ? (
         <>
           <BackButton></BackButton>
-          <DownloadPDFButton selectedMeter={selectedMeter}></DownloadPDFButton>
           <button
             className="back-button"
             onClick={() => navigate("/date-picker")}
@@ -68,8 +67,13 @@ export default function MeterReadings() {
           >
             ✖
           </button>
-          {selectedMeter != null ? (
-            <Table selectedMeter={selectedMeter} />
+          {selectedMeter != null ? (<>
+           <Table selectedMeter={selectedMeter} />
+
+           <DownloadPDFButton selectedMeter={selectedMeter}></DownloadPDFButton>
+
+          </>
+            
           ) : (
             <p>Please select a meter !</p>
           )}

@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import formatINR from "../assets/currency-formater";
+import './table.css'
 
 export default function Table({ selectedMeter }) {
   const charge = 5.82;

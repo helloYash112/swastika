@@ -7,6 +7,7 @@ import StatusAnimation from "./StatusAnimation";
 import { fetchMeterData } from "../userSlice";
 import BackButton from "./BackButton";
 import Table from "./Table";
+import DownloadPDFButton from './DownloadPDFButton';
 
 export default function MeterReadingPicker() {
   const user = useSelector((state) => state.user?.user);
@@ -75,6 +76,7 @@ export default function MeterReadingPicker() {
     const loadCurrentMonthData =async ()=>{
        try{
       const {startDate,endDate}=currentMonth();
+      //console.log(startDate,endDate);
       const meterId = option?.value;
       const res=await dispatch(fetchMeterData({meterId,startDate,endDate}));
       //console.log(res.payload);
@@ -91,7 +93,7 @@ export default function MeterReadingPicker() {
 
   return (
     <div className={!isSubmitted ? "form-container" : "table-container"}>
-      <h2 className="title">Get Reading By Month</h2>
+        {!isSubmitted ? (<h2 className="title">Get Reading By Month</h2>) : (<h2 className="title">{month.label} readings for {selectedMeter.label} Meter</h2>)}
 
       <StatusAnimation />
       {!isSubmitted ? (
@@ -138,6 +140,7 @@ export default function MeterReadingPicker() {
           </button>
 
           {selectedMeter != null && <Table selectedMeter={selectedMeter} />}
+          <DownloadPDFButton selectedMeter={selectedMeter}></DownloadPDFButton>
         </div>
       )}
     </div>

@@ -5,11 +5,11 @@ const year = now.getFullYear();
 
 const currentMonth= ()=>{
 const startDate = formatLocalDate(
-  new Date(now.getFullYear(), now.getMonth(), 1)
+  new Date(year, now.getMonth(), 2)
 );
 
 const endDate = formatLocalDate(
-  new Date(now.getFullYear(), now.getMonth() + 1, 0)
+  new Date(year, now.getMonth() + 1, 2)
 );
 return {startDate,endDate};
 }
@@ -20,8 +20,8 @@ const formatLocalDate = (date) => {
 };
 
 const months = Array.from({ length: 12 }, (_, i) => {
-  const startDate = new Date(year, i, 1);
-  const endDate = new Date(year, i + 1, 1);
+  const startDate = new Date(year, i, 2);
+  const endDate = new Date(year, i + 1, 2);
 
   return {
     startDate: formatLocalDate(startDate),

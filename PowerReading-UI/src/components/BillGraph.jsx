@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis, Legend ,Tooltip} from "recharts";
 
 export default function BillGraph() {
   const unit_charge = 5.85;
@@ -46,12 +46,13 @@ return (
           <CartesianGrid strokeDasharray="5 5" />
 
           <XAxis dataKey="graphDate" />
-
+          <Tooltip></Tooltip>
           <YAxis />
+          <Legend></Legend>
 
           <Line type="monotone" dataKey="usage" />
 
-          <Line type="monotone" dataKey="amount" />
+          <Line type="monotone" dataKey="amount" stroke="#82ca9d" name="Total Amount" />
         </LineChart>
       </div>
     ))}

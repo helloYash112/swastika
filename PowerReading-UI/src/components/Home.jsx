@@ -4,7 +4,7 @@ import './home.css'
 import { useSelector,useDispatch } from "react-redux";
 import KWHdailyUtilityGraph from "./KWHdailyUtilityGraph";
 import { useNavigate } from "react-router-dom"
-
+import BillGraph from "./BillGraph";
 
 
 export function Home(){
@@ -36,6 +36,6 @@ export function Home(){
 
         </div>
         <KWHdailyUtilityGraph></KWHdailyUtilityGraph>
-       
+        <BillGraph></BillGraph>
     </div>
 }

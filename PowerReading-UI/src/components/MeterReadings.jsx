@@ -5,6 +5,7 @@ import "./meterReadings.css";
 import { useNavigate } from "react-router-dom";
 import BackButton from "./BackButton";
 import DownloadPDFButton from "./DownloadPDFButton";
+import KWHdailyUtilityGraph from "./KWHdailyUtilityGraph";
 
 import Table from "./Table";
 
@@ -14,6 +15,7 @@ export default function MeterReadings() {
   const [selectedMeter, setSelectedMeter] = useState(null);
   const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isGraph, setGraph] = useState(false);
 
   const options = meters.map((meter) => ({
     value: meter.id,
@@ -62,23 +64,28 @@ export default function MeterReadings() {
               float: "right",
               fontSize: "20px",
               cursor: "pointer",
-              backgroundColor:"red"
+              backgroundColor: "red",
             }}
           >
             ✖
           </button>
-          {selectedMeter != null ? (<>
-           <Table selectedMeter={selectedMeter} />
-
-           <DownloadPDFButton selectedMeter={selectedMeter}></DownloadPDFButton>
-
-          </>
-            
+          <DownloadPDFButton selectedMeter={selectedMeter}></DownloadPDFButton>
+          <button
+            style={{
+              background: "linear-gradient(135deg, rgb(143, 12, 78), #13718d)",
+            }}
+            onClick={() => setGraph((prev) => !prev)}
+          >
+            {!isGraph ? "See Kwh&usage in graph " : "See on Table"}
+          </button>
+          {selectedMeter != null && !isGraph ? (
+            <Table selectedMeter={selectedMeter} />
           ) : (
-            <p>Please select a meter !</p>
+            <KWHdailyUtilityGraph />
           )}
         </>
       )}
+      {selectedMeter ==null && (<h2 style={{color:"red"}}> Please select meter from list... </h2>)}
     </div>
   );
 }

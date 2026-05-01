@@ -1,6 +1,6 @@
 #app {
   text-align: center;
-  background-color: #f5f5dc; /* soft mustard background */
+  background: linear-gradient(135deg, rgb(143, 12, 78), #13718d);
   min-height: 100vh;
   padding: 40px;
 }

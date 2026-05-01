@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import "./meterReadingPicker.css";
 import { useSelector, useDispatch } from "react-redux";
-import {months,currentMonth} from "../assets/months";
+import { months, currentMonth } from "../assets/months";
 import StatusAnimation from "./StatusAnimation";
 import { fetchMeterData } from "../userSlice";
 import BackButton from "./BackButton";
 import Table from "./Table";
-import DownloadPDFButton from './DownloadPDFButton';
+import DownloadPDFButton from "./DownloadPDFButton";
+import KWHdailyUtilityGraph from "./KWHdailyUtilityGraph";
 
 export default function MeterReadingPicker() {
   const user = useSelector((state) => state.user?.user);
@@ -17,7 +18,8 @@ export default function MeterReadingPicker() {
   const [option, setOption] = useState(null);
   const [selectedMeter, setMeter] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
- 
+  const [isgraph, setGraph] = useState(false);
+
   const calendar = [
     "January",
     "February",
@@ -43,7 +45,7 @@ export default function MeterReadingPicker() {
   const monthOptions = months.map((m, idx) => ({
     value: m.startDate,
     label: calendar[idx],
-    endDate: m.endDate, 
+    endDate: m.endDate,
   }));
 
   const handleSubmit = async (e) => {
@@ -73,27 +75,32 @@ export default function MeterReadingPicker() {
   };
   // Reset back to form page
   const handleClose = () => {
-    const loadCurrentMonthData =async ()=>{
-       try{
-      const {startDate,endDate}=currentMonth();
-      //console.log(startDate,endDate);
-      const meterId = option?.value;
-      const res=await dispatch(fetchMeterData({meterId,startDate,endDate}));
-      //console.log(res.payload);
-
-    }catch(err){
-      console.error(err);
-
-    }
-
-    }
+    const loadCurrentMonthData = async () => {
+      try {
+        const { startDate, endDate } = currentMonth();
+        //console.log(startDate,endDate);
+        const meterId = option?.value;
+        const res = await dispatch(
+          fetchMeterData({ meterId, startDate, endDate }),
+        );
+        //console.log(res.payload);
+      } catch (err) {
+        console.error(err);
+      }
+    };
     loadCurrentMonthData();
     setIsSubmitted(false);
   };
 
   return (
     <div className={!isSubmitted ? "form-container" : "table-container"}>
-        {!isSubmitted ? (<h2 className="title">Get Reading By Month</h2>) : (<h2 className="title">{month.label} readings for {selectedMeter.label} Meter</h2>)}
+      {!isSubmitted ? (
+        <h2 className="title">Get Reading By Month</h2>
+      ) : (
+        <h2 className="title">
+          {month.label} readings for {selectedMeter.label} Meter
+        </h2>
+      )}
 
       <StatusAnimation />
       {!isSubmitted ? (
@@ -123,7 +130,10 @@ export default function MeterReadingPicker() {
           <button type="submit" className="submit-btn">
             Submit
           </button>
-          <BackButton to="/get/reading" label="Back to reading page"></BackButton>
+          <BackButton
+            to="/get/reading"
+            label="Back to reading page"
+          ></BackButton>
         </form>
       ) : (
         <div>
@@ -133,14 +143,25 @@ export default function MeterReadingPicker() {
               float: "right",
               fontSize: "20px",
               cursor: "pointer",
-              backgroundColor:"red"
+              backgroundColor: "red",
             }}
           >
             ✖
           </button>
-
-          {selectedMeter != null && <Table selectedMeter={selectedMeter} />}
+          <button
+            style={{
+              background: "linear-gradient(135deg, rgb(143, 12, 78), #13718d)",
+            }}
+            onClick={() => setGraph((prev) => !prev)}
+          >
+            {!isgraph ? "See Kwh&usage in graph " : "See on Table"}
+          </button>
           <DownloadPDFButton selectedMeter={selectedMeter}></DownloadPDFButton>
+          {selectedMeter != null && !isgraph ? (
+            <Table selectedMeter={selectedMeter} />
+          ) : (
+            <KWHdailyUtilityGraph />
+          )}
         </div>
       )}
     </div>

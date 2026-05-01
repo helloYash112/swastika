@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Header } from "./Header"
 import './home.css'
 import { useSelector,useDispatch } from "react-redux";
-
+import KWHdailyUtilityGraph from "./KWHdailyUtilityGraph";
 import { useNavigate } from "react-router-dom"
 
 
@@ -35,8 +35,7 @@ export function Home(){
              <button id="rbtn" onClick={()=>navigater('/get/reading')}> Get Readings...</button>
 
         </div>
-        
-      
+        <KWHdailyUtilityGraph></KWHdailyUtilityGraph>
        
     </div>
 }

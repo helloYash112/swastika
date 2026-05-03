@@ -1,43 +1,199 @@
-#root {
-  width: 100%;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Black background */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #000;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Purple signup card */
+.container form {
+  width: 360px;
+  padding: 30px;
+  background: linear-gradient(135deg, #7b2ff7 0%, #9d4edd 50%, #f9a826 100%);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(106, 17, 203, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Input box wrapper */
+.input-box {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 0 12px;
+  transition: 0.3s ease;
 }
 
-.card {
-  padding: 2em;
+.input-box:focus-within {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
 }
 
-.read-the-docs {
-  color: #888;
+.icon {
+  font-size: 16px;
+  margin-right: 8px;
+  color: white;
 }
 
+.input-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+}
 
+.input-box input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- PICKER SPECIFIC FIXES --- */
+
+/* Force the wrapper to stay white for visibility */
+.form-picker-container {
+  background: white !important;
+  padding: 8px;
+  display: flex;
+  gap: 10px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* DatePicker Input */
+.form-picker-container .react-datepicker-wrapper input {
+  background: #f0f0f0 !important;
+  color: black !important;
+  border: 1px solid #ccc !important;
+  border-radius: 5px;
+  padding: 5px;
+  width: 110px;
+  font-size: 13px;
+}
+
+/* TimePicker Wrapper */
+.form-picker-container .react-time-picker__wrapper {
+  border: 1px solid #ccc !important;
+  border-radius: 5px;
+  background: #f0f0f0 !important;
+}
+
+/* TimePicker Text & Icons */
+.form-picker-container .react-time-picker__inputGroup__input,
+.form-picker-container .react-time-picker__inputGroup__divider,
+.form-picker-container .react-time-picker__inputGroup__amPm {
+  color: black !important;
+}
+
+.form-picker-container .react-time-picker__button svg {
+  stroke: black !important;
+}
+
+/* Popup/Dropdown Fixes (The black background issue) */
+.react-datepicker, 
+.react-datepicker__header, 
+.react-time-picker__clock {
+  background-color: white !important;
+  color: black !important;
+}
+
+.react-datepicker__day, 
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: black !important;
+}
+
+/* --- BUTTONS --- */
+.container form button {
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #9d4edd, #5a189a);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.container form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(249, 168, 38, 0.4);
+}
+/* --- TOGGLE SWITCH STYLING --- */
+.toggle-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  margin-bottom: 5px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #f9a826; /* Matches your orange gradient end */
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* Ensure the picker container animates slightly when appearing */
+.form-picker-container {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
